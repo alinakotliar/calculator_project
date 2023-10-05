@@ -7,8 +7,8 @@ import org.openqa.selenium.WebDriver;
 
 public class WebDriverFactory {
     public WebDriver getWebDriver() {
-        String browserProperty = new PropertyHolder().readProperty("browser");
-        SupportedBrowsers supportedBrowser = SupportedBrowserConverter.valueOfWebBrowser(browserProperty);
-        return supportedBrowser.getWebDriver();
+        return SupportedBrowserConverter.valueOfWebBrowser(
+                new PropertyHolder().readProperty("browser")
+        ).getWebDriver();
     }
 }

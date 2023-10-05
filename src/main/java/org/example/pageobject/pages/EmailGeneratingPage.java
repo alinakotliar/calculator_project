@@ -50,7 +50,7 @@ public class EmailGeneratingPage extends BasePage {
     }
 
     public void copyEmailToClipboard() {
-                // Найдите поле ввода email и выполните копирование
+
                 WebElement inputElement = webDriver.findElement(By.xpath("//*[@id=\"navbar\"]/div/div[3]/form/div/input"));
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(inputElement));
@@ -63,10 +63,8 @@ public class EmailGeneratingPage extends BasePage {
                 StringSelection strSel = new StringSelection(modifiedText);
                 clipboard.setContents(strSel, null);
 
-        // Вернитесь на первую вкладку
-        ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
 
-        // Переключитесь на новую (вторую) вкладку
+        ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(0));
     }
 
@@ -78,7 +76,7 @@ public class EmailGeneratingPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(webDriver, timeout);
         By refreshButtonLocator = By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/button[1]/span[1]");
 
-        WebElement refreshButton = wait.until(ExpectedConditions.visibilityOfElementLocated(refreshButtonLocator));
+        WebElement refreshButton = wait.until(ExpectedConditions.elementToBeClickable(refreshButtonLocator));
 
         refreshButton.click();
     }

@@ -7,6 +7,7 @@ import org.example.pageobject.pages.modules.IFrame;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,15 +19,15 @@ import java.util.List;
 @Getter
 public class CalculatorPage extends BasePage {
     @FindBy(xpath = "(//iframe)[1]")
+
     private WebElement iframe1;
     @FindBy(xpath = "//iframe[@id ='myFrame']")
+
     private WebElement iframe2;
 
 
     public CalculatorPage(WebDriver webDriver) {
         super(webDriver);
-        switchToFrame1();
-        switchToFrame2();
     }
 
     public void switchToFrame1() {
@@ -56,20 +57,22 @@ public class CalculatorPage extends BasePage {
         return new EstimateCostForm(webDriver);
     }
     public void fillOutCalculatorForm(){
+        switchToFrame1();
+        switchToFrame2();
         IFrame iframe = getIframe();
         iframe.setNumberOfInstances("4");
         iframe.setPurposeOfInstances("leave blank");
-        /*
         iframe.selectSeries();
         iframe.selectMachineType();
+
         iframe.selectAddGpus();
         iframe.selectGpuType();
         iframe.selectGpuNumber();
+
         iframe.selectLocalSsd();
         iframe.selectDatacenterLocation();
         iframe.selectCommittedUsage();
 
-         */
         iframe.addToEstimate();
     }
 

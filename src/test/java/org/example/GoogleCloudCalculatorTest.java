@@ -28,16 +28,12 @@ public class GoogleCloudCalculatorTest extends BaseTest{
         EmailGeneratingPage emailPage = new EmailGeneratingPage(webDriver);
         EstimateCostForm estimateForm = new EstimateCostForm(webDriver);
 
-        // Step 1: Open the Google Cloud home page
+
+
         homePage.open();
-        // Step 2: Search for the calculator
         homePage.performSearch("Google Cloud Platform Pricing Calculator");
-
-        // Step 3: Click on the calculator link in the search results
         searchResultsPage.clickCalculatorLink();
-
-        // Step 4: Click "COMPUTE ENGINE" calculatorPage.clickComputeEngine();
-      calculatorPage.fillOutCalculatorForm();
+        calculatorPage.fillOutCalculatorForm();
 
 
         emailPage.navigateToMailDrop();
@@ -68,7 +64,5 @@ public class GoogleCloudCalculatorTest extends BaseTest{
     @AfterMethod
     public void closeDriver() {
         quit();
-
+*/
     }
-    */
-}
