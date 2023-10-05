@@ -15,10 +15,10 @@ public class EstimateCostForm extends CalculatorPage {
         super(webDriver);
     }
 
-    @FindBy(css = "button[aria-label='Email Estimate']")
+    @FindBy(id = "Email Estimate")
     private WebElement emailEstimateButton;
 
-    @FindBy(xpath = "//*[@id=\"input_603\"]")
+    @FindBy(css = "[ng-model='emailQuote.user.email']")
     private WebElement emailInputElement;
 
     @FindBy(xpath = "//button[contains(text(), 'Send Email')]")

@@ -134,5 +134,13 @@ import java.time.Duration;
         button.click();
     }
 
+    public String extractCostFromElement(WebElement element) {
+        return element.getText().trim(); // Получаем текст элемента и убираем лишние пробелы
+    }
+    public String getEstimatedCost() {
+        WebElement costElement = webDriver.findElement(By.xpath("//*[@id=\"resultBlock\"]/md-card/md-toolbar/div"));
+        return extractCostFromElement(costElement);
+    }
+
     }
 

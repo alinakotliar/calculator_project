@@ -35,5 +35,4 @@ public class GoogleCloudHomePage extends BasePage {
         searchIconVisible.submit();
     }
 
-    // Add other methods specific to the home page if needed
 }

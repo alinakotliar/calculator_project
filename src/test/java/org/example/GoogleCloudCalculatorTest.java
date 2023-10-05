@@ -44,10 +44,25 @@ public class GoogleCloudCalculatorTest extends BaseTest{
         emailPage.generateRandomEmail();
         emailPage.copyEmailToClipboard();
 
-        estimateForm.selectEmailEstimate();
-        estimateForm.pasteEmail();
-        estimateForm.pressSendMail();
+        calculatorPage.emailEstimation();
+        emailPage.refreshMailbox();
+        emailPage.extractAndCompareCosts();
 
+        calculatorPage.getIframe().getEstimatedCost();
+
+        String emailPageCostStr = emailPage.extractAndCompareCosts();
+        String iframeCostStr = calculatorPage.getIframe().getEstimatedCost();
+
+        // Преобразовать строки в числа
+        double emailPageCost = extractCostValue(emailPageCostStr);
+        double iframeCost = extractCostValue(iframeCostStr);
+
+        // Сравнить стоимости и убедиться, что они равны
+        Assert.assertEquals(emailPageCost, iframeCost, 0.01);
+
+    }
+    private double extractCostValue(String costStr) {
+        return Double.parseDouble(costStr.replace("USD ", "").trim());
     }
 /*
     @AfterMethod

@@ -2,6 +2,7 @@ package org.example.pageobject.pages;
 
 import lombok.Getter;
 import org.example.pageobject.BasePage;
+import org.example.pageobject.pages.modules.EstimateCostForm;
 import org.example.pageobject.pages.modules.IFrame;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -51,6 +52,9 @@ public class CalculatorPage extends BasePage {
     public IFrame getIframe() {
         return new IFrame(webDriver);
     }
+    public EstimateCostForm getEstimateCostForm() {
+        return new EstimateCostForm(webDriver);
+    }
     public void fillOutCalculatorForm(){
         IFrame iframe = getIframe();
         iframe.setNumberOfInstances("4");
@@ -69,8 +73,10 @@ public class CalculatorPage extends BasePage {
         iframe.addToEstimate();
     }
 
-    public void estimateForm(){
-        IFrame iframe = getIframe();
-    }
+public void emailEstimation(){
+        getEstimateCostForm().selectEmailEstimate();
+        getEstimateCostForm().pasteEmail();
+        getEstimateCostForm().pressSendMail();
+}
 
 }
