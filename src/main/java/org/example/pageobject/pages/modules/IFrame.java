@@ -1,6 +1,7 @@
 package org.example.pageobject.pages.modules;
 
 import lombok.Getter;
+import org.example.pageobject.BasePage;
 import org.example.pageobject.pages.CalculatorPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,9 +14,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Getter
-    public class IFrame extends CalculatorPage {
+    public class IFrame extends BasePage {
 
 
     @FindBy(xpath = "//input[contains(@ng-model,'computeServer.quantity')]")
@@ -69,8 +72,11 @@ import java.util.List;
     @FindBy(xpath = "//div[.='1 Year']")
     private WebElement year;
 
+    @FindBy(xpath = "//md-card-content[@id='resultBlock']//h2[@class='md-title']/b")
+    private WebElement getMonthlyEstimatedCost;
+
     @FindBy(xpath = "//button[contains(@class, 'md-raised') and contains(@class, 'md-primary') and contains(@class, 'cpc-button')]")
-    private WebElement addToEstimatebutton;
+    private WebElement emailEstimateBtn;
 
     public IFrame(WebDriver webDriver) {
         super(webDriver);
@@ -134,16 +140,19 @@ import java.util.List;
         waitForClickabilityOfElement(webDriver, committedUsageLocator).click();
     }
 
-    public void addToEstimate() {
-        addToEstimatebutton.click();
+
+    public String getEstimatedMonthlyCost(){
+        Pattern p = Pattern.compile("(\\d{1,3},)?\\d{3}\\.\\d{2}");
+        Matcher m = p.matcher(getMonthlyEstimatedCost.getText());
+        m.find();
+        return m.group();
     }
 
-    public String extractCostFromElement(WebElement element) {
-        return element.getText().trim(); // Получаем текст элемента и убираем лишние пробелы
-    }
-    public String getEstimatedCost() {
-        WebElement costElement = webDriver.findElement(By.xpath("//*[@id=\"resultBlock\"]/md-card/md-toolbar/div"));
-        return extractCostFromElement(costElement);
+    public EstimateCostForm clickEmailEstimateBtn(){
+        waitForVisibility(emailEstimateBtn);
+        emailEstimateBtn.click();
+
+        return new EstimateCostForm(webDriver);
     }
 
     }

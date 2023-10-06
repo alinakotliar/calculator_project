@@ -25,6 +25,12 @@ public class CalculatorPage extends BasePage {
 
     private WebElement iframe2;
 
+    @FindBy(xpath = "//button[@title='Email Estimate']//span[contains(text(), 'email')]")
+    private WebElement emailEstimate;
+    @FindBy(xpath = "//input[@type='email']")
+    private WebElement emailInput;
+    @FindBy(xpath = "//button[contains(text(), 'Send Email')]")
+    private WebElement buttonSendEmail;
 
     public CalculatorPage(WebDriver webDriver) {
         super(webDriver);
@@ -53,10 +59,12 @@ public class CalculatorPage extends BasePage {
     public IFrame getIframe() {
         return new IFrame(webDriver);
     }
+
     public EstimateCostForm getEstimateCostForm() {
         return new EstimateCostForm(webDriver);
     }
-    public void fillOutCalculatorForm(){
+
+    public void fillOutCalculatorForm() {
         switchToFrame1();
         switchToFrame2();
         IFrame iframe = getIframe();
@@ -73,13 +81,15 @@ public class CalculatorPage extends BasePage {
         iframe.selectDatacenterLocation();
         iframe.selectCommittedUsage();
 
-        iframe.addToEstimate();
+        iframe.clickEmailEstimateBtn();
+        getEstimateCostForm().clickEstimateByEmail();
     }
 
-public void emailEstimation(){
-        getEstimateCostForm().selectEmailEstimate();
-        getEstimateCostForm().pasteEmail();
-        getEstimateCostForm().pressSendMail();
-}
 
+    public void sendEmail(String email) {
+        switchToFrame1();
+        switchToFrame2();
+        emailInput.sendKeys(email);
+        buttonSendEmail.click();
+    }
 }
