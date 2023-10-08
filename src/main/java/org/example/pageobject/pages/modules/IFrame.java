@@ -72,11 +72,14 @@ import java.util.regex.Pattern;
     @FindBy(xpath = "//div[.='1 Year']")
     private WebElement year;
 
-    @FindBy(xpath = "//md-card-content[@id='resultBlock']//h2[@class='md-title']/b")
+    @FindBy(xpath = "//div[@id='mail']//h2[contains(text(), 'Estimated Monthly Cost')]")
     private WebElement getMonthlyEstimatedCost;
 
-    @FindBy(xpath = "//button[contains(@class, 'md-raised') and contains(@class, 'md-primary') and contains(@class, 'cpc-button')]")
+
+    @FindBy(id = "Email Estimate")
     private WebElement emailEstimateBtn;
+    @FindBy(xpath = "//form[@name='ComputeEngineForm']//button[contains(text(), 'Add to Estimate')]")
+    private WebElement addToEstimateBtn;
 
     public IFrame(WebDriver webDriver) {
         super(webDriver);
@@ -139,8 +142,9 @@ import java.util.regex.Pattern;
         String committedUsageLocator = "//div[contains(@class,'md-clickable')]//div[contains(text(), '1 Year')]";
         waitForClickabilityOfElement(webDriver, committedUsageLocator).click();
     }
-
-
+    public void clickAddToEstimateBtn(){
+        addToEstimateBtn.click();
+    }
     public String getEstimatedMonthlyCost(){
         Pattern p = Pattern.compile("(\\d{1,3},)?\\d{3}\\.\\d{2}");
         Matcher m = p.matcher(getMonthlyEstimatedCost.getText());
@@ -154,6 +158,5 @@ import java.util.regex.Pattern;
 
         return new EstimateCostForm(webDriver);
     }
-
     }
 

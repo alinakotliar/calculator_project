@@ -20,11 +20,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 
-public class GoogleCloudCalculatorTest extends BaseTest{
+public class GoogleCloudCalculatorTest extends BaseTest {
     private final GoogleCloudHomePage homePage = new GoogleCloudHomePage(webDriver);
     private final SearchResultsPage searchResultsPage = new SearchResultsPage(webDriver);
     private final YopmailPrivacyWindow yopmailPrivacyWindow = new YopmailPrivacyWindow(webDriver);
-   private final YopmailMainPage yopmailMainPage = new YopmailMainPage(webDriver);
+    private final YopmailMainPage yopmailMainPage = new YopmailMainPage(webDriver);
     private final EmailGeneratorPage emailGeneratorPage = new EmailGeneratorPage(webDriver);
     private final EmailBoxPage emailBoxPage = new EmailBoxPage(webDriver);
     private final CalculatorPage calculatorPage = new CalculatorPage(webDriver);
@@ -44,28 +44,30 @@ public class GoogleCloudCalculatorTest extends BaseTest{
         searchResultsPage.clickCalculatorLink();
         calculatorPage.fillOutCalculatorForm();
 
-        // Шаг 11: Откройте новую вкладку и перейдите на https://yopmail.com/ или аналогичный сервис временных почтовых адресов
+
         String calculatorPageWindow = webDriver.getWindowHandle();
         webDriver.switchTo().newWindow(WindowType.TAB);
         webDriver.get("https://yopmail.com/");
 
         yopmailMainPage.clickCreateRandomEmailElement();
         webDriver.navigate().to("https://yopmail.com/ru/email-generator");
-// Шаг 12: Сгенерируйте случайный email
-        String generatedEmail = emailGeneratorPage.getEmailAddress();
 
-// Шаг 13: Вернитесь на страницу калькулятора и введите сгенерированный email в поле для email
+        String generatedEmail = emailGeneratorPage.getEmailAddress();
+        String yopMailWindow = webDriver.getWindowHandle();
+
+
         webDriver.switchTo().window(calculatorPageWindow);
+        calculatorPage.switchToFrame1();
+        calculatorPage.switchToFrame2();
+        calculatorPage.getIframe().clickEmailEstimateBtn();
         calculatorPage.getEstimateCostForm().inputEmail(generatedEmail);
         calculatorPage.getEstimateCostForm().clickSendEmailBtn();
 
+        webDriver.switchTo().window(yopMailWindow);
 
-// Шаг 14: Перейдите во вкладку с почтой
-        webDriver.switchTo().window(calculatorPageWindow);
-        webDriver.switchTo().newWindow(WindowType.TAB);
-        webDriver.get("https://yopmail.com/");
 
-// Шаг 15: Дождитесь письма с оценкой стоимости и проверьте, что 'Total Estimated Monthly Cost' в письме совпадает с результатом в калькуляторе
+
+        emailGeneratorPage.clickCheckEmailBtn();
         String estimatedMonthlyCostFromEmail = emailBoxPage
                 .delayedClickRefreshBtn(10)
                 .switchToIfMailFrame()
@@ -76,10 +78,8 @@ public class GoogleCloudCalculatorTest extends BaseTest{
     }
 
 
-    }
-/*
     @AfterMethod
     public void closeDriver() {
         quit();
-*/
-
+    }
+}

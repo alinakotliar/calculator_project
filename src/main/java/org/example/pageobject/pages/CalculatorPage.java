@@ -31,6 +31,8 @@ public class CalculatorPage extends BasePage {
     private WebElement emailInput;
     @FindBy(xpath = "//button[contains(text(), 'Send Email')]")
     private WebElement buttonSendEmail;
+    @FindBy(id = "Email Estimate")
+    private WebElement emailEstimateBtn;
 
     public CalculatorPage(WebDriver webDriver) {
         super(webDriver);
@@ -81,15 +83,16 @@ public class CalculatorPage extends BasePage {
         iframe.selectDatacenterLocation();
         iframe.selectCommittedUsage();
 
-        iframe.clickEmailEstimateBtn();
-        getEstimateCostForm().clickEstimateByEmail();
+        iframe.clickAddToEstimateBtn();
+        webDriver.switchTo().defaultContent();
     }
 
 
     public void sendEmail(String email) {
         switchToFrame1();
         switchToFrame2();
-        emailInput.sendKeys(email);
-        buttonSendEmail.click();
+        getEstimateCostForm().inputEmail(email);
+        getEstimateCostForm().clickSendEmailBtn();
+
     }
 }

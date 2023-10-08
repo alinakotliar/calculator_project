@@ -16,17 +16,12 @@ public class EstimateCostForm extends BasePage {
         super(webDriver);
     }
 
-    @FindBy(id = "Email Estimate")
-    private WebElement emailEstimateBtn;
 
-    @FindBy(xpath = "//label[@for='input_624']")
+    @FindBy(xpath = "//input[@type='email']")
     private WebElement emailInput;
 
     @FindBy(xpath = "//button[contains(text(), 'Send Email')]")
     private WebElement sendEmailBtn;
-    public void clickEstimateByEmail(){
-        emailEstimateBtn.click();
-    }
 
     public void  inputEmail(String email){
         waitForVisibility(emailInput);
