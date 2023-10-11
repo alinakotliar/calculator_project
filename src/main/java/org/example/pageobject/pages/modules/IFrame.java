@@ -36,8 +36,6 @@ import java.util.regex.Pattern;
     @FindBy(xpath = "//*[@id='mainForm']/div[2]/div/md-card/md-card-content/div/div[1]/form/div[7]/div[1]")
     private WebElement MachineType;
 
-    @FindBy(css = "md-option[value='CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8']")
-    private WebElement standard8;
 
     @FindBy(xpath = "//md-checkbox[@aria-label='Add GPUs']")
     private WebElement checkbox;
@@ -45,32 +43,19 @@ import java.util.regex.Pattern;
     @FindBy(xpath = "//md-select[@aria-label='GPU type']")
     private WebElement GpuType;
 
-    @FindBy(xpath = "//div[text()='NVIDIA Tesla V100']")
-    private WebElement TeslaV100;
-
     @FindBy(id = "select_507")
     private WebElement GpuNumber;
 
-    @FindBy(css = "md-option[ng-value='item.value'][value='1']")
-    private WebElement OneGpu;
 
     @FindBy(xpath = "//md-select[@placeholder=\"Local SSD\"]")
     private WebElement LocalSsd;
 
-    @FindBy(css = "md-option[ng-value='item.value'][value='2']")
-    private WebElement standard;
-
     @FindBy(xpath = "//form[@name='ComputeEngineForm']//md-select[@placeholder='Datacenter location']")
     private WebElement DatacenterLocation;
 
-    @FindBy(xpath = "//div[contains(text(), 'Frankfurt (europe-west3)')]")
-    private WebElement frankfurt;
 
     @FindBy(xpath = "//form[@name='ComputeEngineForm']//md-select[@placeholder='Committed usage']")
     private WebElement CommittedUsage;
-
-    @FindBy(xpath = "//div[.='1 Year']")
-    private WebElement year;
 
     @FindBy(xpath = "//div[@id='mail']//h2[contains(text(), 'Estimated Monthly Cost')]")
     private WebElement getMonthlyEstimatedCost;

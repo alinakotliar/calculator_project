@@ -70,9 +70,11 @@ public class GoogleCloudCalculatorTest extends BaseTest {
         Assert.assertEquals(estimatedMonthlyCostFromEmail, estimatedMonthlyCostFromCalculator);
     }
 
-
+/*
     @AfterMethod
     public void closeDriver() {
         quit();
     }
+
+ */
 }
