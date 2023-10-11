@@ -1,18 +1,12 @@
 package org.example;
 
-
-import org.example.pageobject.BasePage;
 import org.example.pageobject.pages.CalculatorPage;
-import org.example.pageobject.pages.EmailGeneratingPage;
 import org.example.pageobject.pages.GoogleCloudHomePage;
 import org.example.pageobject.pages.SearchResultsPage;
-import org.example.pageobject.pages.modules.EstimateCostForm;
 import org.example.pageobject.pages.modules.IFrame;
 import org.example.pageobject.yopmail.EmailBoxPage;
 import org.example.pageobject.yopmail.EmailGeneratorPage;
 import org.example.pageobject.yopmail.YopmailMainPage;
-import org.example.pageobject.yopmail.YopmailPrivacyWindow;
-import org.example.util.WindowSwitchUtils;
 import org.openqa.selenium.WindowType;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -23,7 +17,6 @@ import org.testng.annotations.Test;
 public class GoogleCloudCalculatorTest extends BaseTest {
     private final GoogleCloudHomePage homePage = new GoogleCloudHomePage(webDriver);
     private final SearchResultsPage searchResultsPage = new SearchResultsPage(webDriver);
-    private final YopmailPrivacyWindow yopmailPrivacyWindow = new YopmailPrivacyWindow(webDriver);
     private final YopmailMainPage yopmailMainPage = new YopmailMainPage(webDriver);
     private final EmailGeneratorPage emailGeneratorPage = new EmailGeneratorPage(webDriver);
     private final EmailBoxPage emailBoxPage = new EmailBoxPage(webDriver);

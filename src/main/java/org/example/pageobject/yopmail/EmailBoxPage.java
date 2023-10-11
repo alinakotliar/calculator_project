@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.time.Duration;
 
+
 public class EmailBoxPage extends BasePage {
     public EmailBoxPage(WebDriver webDriver) {
         super(webDriver);
