@@ -43,7 +43,7 @@ public class GoogleCloudCalculatorTest extends BaseTest {
         webDriver.get("https://yopmail.com/");
 
         yopmailMainPage.clickCreateRandomEmailElement();
-        webDriver.navigate().to("https://yopmail.com/ru/email-generator");
+
 
         String generatedEmail = emailGeneratorPage.getEmailAddress();
         String yopMailWindow = webDriver.getWindowHandle();
