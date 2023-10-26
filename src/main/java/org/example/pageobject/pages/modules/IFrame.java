@@ -6,7 +6,6 @@ import org.example.pageobject.pages.CalculatorPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -43,7 +42,7 @@ import java.util.regex.Pattern;
     @FindBy(xpath = "//md-select[@aria-label='GPU type']")
     private WebElement GpuType;
 
-    @FindBy(id = "select_507")
+    @FindBy(xpath = "//md-select[@placeholder='Number of GPUs']")
     private WebElement GpuNumber;
 
 
@@ -82,7 +81,7 @@ import java.util.regex.Pattern;
 
     public void selectSeries() {
         instanceSeriesTypeDropDownMenu.click();
-        String seriesLocator = "//md-option[@id='select_option_220']";
+        String seriesLocator = "//md-option[@value='n1']";
         waitForClickabilityOfElement(webDriver, seriesLocator).click();
     }
 
