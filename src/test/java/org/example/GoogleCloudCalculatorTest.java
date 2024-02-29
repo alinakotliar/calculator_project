@@ -13,6 +13,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Properties;
+
 
 public class GoogleCloudCalculatorTest extends BaseTest {
     private final GoogleCloudHomePage homePage = new GoogleCloudHomePage(webDriver);
@@ -22,8 +24,8 @@ public class GoogleCloudCalculatorTest extends BaseTest {
     private final EmailBoxPage emailBoxPage = new EmailBoxPage(webDriver);
     private final CalculatorPage calculatorPage = new CalculatorPage(webDriver);
     private final IFrame iframe = new IFrame(webDriver);
-
-
+    public String TEMP_EMAIL_URL = "https://yopmail.com/";
+    public String TEMP_EMAIL_GENERATOR = "https://yopmail.com/ru/email-generator";
     @BeforeMethod
     public void setUp() {
         setUpWebDriver();
@@ -33,17 +35,17 @@ public class GoogleCloudCalculatorTest extends BaseTest {
     public void testGoogleCloudPricingCalculator() {
 
         homePage.open();
-        homePage.performSearch("Google Cloud Platform Pricing Calculator");
+        homePage.performSearch(TestData.getSearchKeyword());
         searchResultsPage.clickCalculatorLink();
         calculatorPage.fillOutCalculatorForm();
 
 
         String calculatorPageWindow = webDriver.getWindowHandle();
         webDriver.switchTo().newWindow(WindowType.TAB);
-        webDriver.get("https://yopmail.com/");
+        webDriver.get(TEMP_EMAIL_URL);
 
         yopmailMainPage.clickCreateRandomEmailElement();
-        webDriver.navigate().to("https://yopmail.com/ru/email-generator");
+        webDriver.navigate().to(TEMP_EMAIL_GENERATOR);
 
         String generatedEmail = emailGeneratorPage.getEmailAddress();
         String yopMailWindow = webDriver.getWindowHandle();
@@ -69,10 +71,10 @@ public class GoogleCloudCalculatorTest extends BaseTest {
         String estimatedMonthlyCostFromCalculator = calculatorPage.getIframe().getEstimatedMonthlyCost();
         Assert.assertEquals(estimatedMonthlyCostFromEmail, estimatedMonthlyCostFromCalculator);
     }
-
     @AfterMethod
     public void closeDriver() {
         quit();
     }
+
 
 }

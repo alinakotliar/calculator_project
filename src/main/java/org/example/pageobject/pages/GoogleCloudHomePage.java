@@ -10,10 +10,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class GoogleCloudHomePage extends BasePage {
-    @FindBy(name = "q")
+    public String GOOGLE_CLOUD_URL = "https://cloud.google.com/";
+    @FindBy(xpath = "//div[@class='ND91id LLv0lb' and @jsname='MVsrn']")
     private WebElement searchIcon;
-
-    @FindBy(xpath = "//button[@aria-label='Search']")
+    @FindBy(xpath = "//label[contains(@class, 'qdOxv-fmcmS-yrriRe') and contains(@class, 'VfPpkd-ksKsZd-mWPk3d') and contains(@class, 'qdOxv-fmcmS-yrriRe-OWXEXe-INsAgc')]//input[@id='i5']")
+    private WebElement searshField;
+    @FindBy(xpath = "//i[@role='button' and @data-icon-position='UbuQg']")
     private WebElement searchInput;
 
     public GoogleCloudHomePage(WebDriver webdriver) {
@@ -21,7 +23,7 @@ public class GoogleCloudHomePage extends BasePage {
     }
 
     public void open() {
-        webDriver.get("https://cloud.google.com/");
+        webDriver.get(GOOGLE_CLOUD_URL);
     }
 
     public void performSearch(String searchTerm) {
@@ -31,8 +33,8 @@ public class GoogleCloudHomePage extends BasePage {
         WebElement searchIconVisible = wait.until(ExpectedConditions.visibilityOf(searchIcon));
 
         searchIconClickable.click(); // Click on the search icon
-        searchIconVisible.sendKeys(searchTerm); // Enter the search term and submit
-        searchIconVisible.submit();
+        searshField.sendKeys(searchTerm); // Enter the search term and submit
+        searshField.submit();
     }
 
 }

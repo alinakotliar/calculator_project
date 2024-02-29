@@ -3,6 +3,7 @@ package org.example.pageobject.pages.modules;
 import lombok.Getter;
 import org.example.pageobject.BasePage;
 import org.example.pageobject.pages.CalculatorPage;
+import org.example.waits.WebDriverWaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +20,7 @@ import java.util.regex.Pattern;
 @Getter
     public class IFrame extends BasePage {
 
-
+    private final WebDriverWaitUtils waitUtils;
     @FindBy(xpath = "//input[contains(@ng-model,'computeServer.quantity')]")
     private WebElement numberOfInstancesInput;
 
@@ -67,11 +68,12 @@ import java.util.regex.Pattern;
 
     public IFrame(WebDriver webDriver) {
         super(webDriver);
+        this.waitUtils = new WebDriverWaitUtils(webDriver);
     }
 
+
     public void setNumberOfInstances(String numOfInstances) {
-        webDriverWait.until(ExpectedConditions.visibilityOf(numberOfInstancesInput));
-        numberOfInstancesInput.sendKeys(numOfInstances);
+        waitUtils.waitForVisibility(numberOfInstancesInput).sendKeys(numOfInstances);
     }
 
     public void setPurposeOfInstances(String purposeOfInstances) {

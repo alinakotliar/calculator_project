@@ -4,15 +4,15 @@ import lombok.Getter;
 import org.example.pageobject.BasePage;
 import org.example.pageobject.pages.modules.EstimateCostForm;
 import org.example.pageobject.pages.modules.IFrame;
-import org.openqa.selenium.By;
+import org.example.properties.TestDataReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+
+
 @Getter
 public class CalculatorPage extends BasePage {
     @FindBy(xpath = "(//iframe)[1]")
@@ -67,8 +67,8 @@ public class CalculatorPage extends BasePage {
         switchToFrame1();
         switchToFrame2();
         IFrame iframe = getIframe();
-        iframe.setNumberOfInstances("4");
-        iframe.setPurposeOfInstances("leave blank");
+        iframe.setNumberOfInstances(TestDataReader.getNumberOfInstances());
+        iframe.setPurposeOfInstances(TestDataReader.getPurposeOfInstances());
         iframe.selectSeries();
         iframe.selectMachineType();
 
