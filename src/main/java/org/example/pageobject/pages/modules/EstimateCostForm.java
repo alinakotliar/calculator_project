@@ -2,9 +2,7 @@ package org.example.pageobject.pages.modules;
 
 import lombok.Getter;
 import org.example.pageobject.BasePage;
-import org.example.pageobject.pages.CalculatorPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.example.waits.WebDriverWaitUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,8 +10,10 @@ import org.openqa.selenium.support.FindBy;
 @Getter
 
 public class EstimateCostForm extends BasePage {
+    private final WebDriverWaitUtils waitUtils;
     public EstimateCostForm(WebDriver webDriver) {
         super(webDriver);
+        this.waitUtils = new WebDriverWaitUtils(webDriver); // Initialize WebDriverWaitUtils
     }
 
 
@@ -24,7 +24,7 @@ public class EstimateCostForm extends BasePage {
     private WebElement sendEmailBtn;
 
     public void  inputEmail(String email){
-        waitForVisibility(emailInput);
+        waitUtils.waitForVisibility(emailInput);
         emailInput.sendKeys(email);
     }
 

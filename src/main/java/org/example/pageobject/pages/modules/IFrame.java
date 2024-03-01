@@ -8,11 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -83,14 +78,14 @@ import java.util.regex.Pattern;
 
     public void selectSeries() {
         instanceSeriesTypeDropDownMenu.click();
-        String seriesLocator = "//md-option[@value='n1']";
-        waitForClickabilityOfElement(webDriver, seriesLocator).click();
+        By seriesLocator = By.xpath("//md-option[@value='n1']");
+        waitUtils.waitForClickability(webDriver, seriesLocator).click();
     }
 
     public void selectMachineType() {
         MachineType.click();
-        String machineTypeLocator = "//md-option[@value='CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8']";
-        waitForClickabilityOfElement(webDriver, machineTypeLocator).click();
+        By machineTypeLocator = By.xpath("//md-option[@value='CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8']");
+        waitUtils.waitForClickability(webDriver, machineTypeLocator).click();
     }
 
     public void selectAddGpus() {
@@ -101,32 +96,32 @@ import java.util.regex.Pattern;
 
     public void selectGpuType() {
         GpuType.click();
-        String typeOfGPULocator = "//md-option/div[contains(text(), 'NVIDIA Tesla V100')]";
-        waitForClickabilityOfElement(webDriver, typeOfGPULocator).click();
+        By typeOfGPULocator = By.xpath("//md-option/div[contains(text(), 'NVIDIA Tesla V100')]");
+        waitUtils.waitForClickability(webDriver, typeOfGPULocator).click();
     }
 
     public void selectGpuNumber() {
         GpuNumber.click();
-        String numberOfGPUsLocator = "//md-option[contains(@ng-repeat,'.computeServer.gpuType')][@value='1']";
-        waitForClickabilityOfElement(webDriver, numberOfGPUsLocator).click();
+        By numberOfGPUsLocator = By.xpath("//md-option[contains(@ng-repeat,'.computeServer.gpuType')][@value='1']");
+        waitUtils.waitForClickability(webDriver, numberOfGPUsLocator).click();
     }
 
     public void selectLocalSsd() {
         LocalSsd.click();
-        String LocalSSD = "//div[@class='md-text ng-binding' and contains(text(), '2x375 GB')]";
-        waitForClickabilityOfElement(webDriver, LocalSSD).click();
+        By localSSD = By.xpath("//div[@class='md-text ng-binding' and contains(text(), '2x375 GB')]");
+        waitUtils.waitForClickability(webDriver, localSSD).click();
     }
 
     public void selectDatacenterLocation() {
         DatacenterLocation.click();
-        String datacenterLocator = "//div[contains(@class,'md-clickable')]//div[contains(text(), 'Frankfurt')]";
-        waitForClickabilityOfElement(webDriver, datacenterLocator).click();
+        By datacenterLocator = By.xpath("//div[contains(@class,'md-clickable')]//div[contains(text(), 'Frankfurt')]");
+        waitUtils.waitForClickability(webDriver, datacenterLocator).click();
     }
 
     public void selectCommittedUsage() {
         CommittedUsage.click();
-        String committedUsageLocator = "//div[contains(@class,'md-clickable')]//div[contains(text(), '1 Year')]";
-        waitForClickabilityOfElement(webDriver, committedUsageLocator).click();
+        By committedUsageLocator = By.xpath("//div[contains(@class,'md-clickable')]//div[contains(text(), '1 Year')]");
+        waitUtils.waitForClickability(webDriver, committedUsageLocator).click();
     }
     public void clickAddToEstimateBtn(){
         addToEstimateBtn.click();
@@ -139,7 +134,7 @@ import java.util.regex.Pattern;
     }
 
     public EstimateCostForm clickEmailEstimateBtn(){
-        waitForVisibility(emailEstimateBtn);
+        waitUtils.waitForVisibility(emailEstimateBtn);
         emailEstimateBtn.click();
 
         return new EstimateCostForm(webDriver);
