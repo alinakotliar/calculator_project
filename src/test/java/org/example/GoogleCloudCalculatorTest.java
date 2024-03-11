@@ -35,7 +35,7 @@ public class GoogleCloudCalculatorTest extends BaseTest {
     public void testGoogleCloudPricingCalculator() {
 
         homePage.open();
-        homePage.performSearch(TestData.getSearchKeyword());
+        homePage.performSearch(TestData.getInstance().getSearchKeyword());
         searchResultsPage.clickCalculatorLink();
         calculatorPage.fillOutCalculatorForm();
 

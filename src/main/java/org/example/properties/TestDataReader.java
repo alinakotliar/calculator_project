@@ -13,7 +13,7 @@ public class TestDataReader {
         try (InputStream input = TestDataReader.class.getResourceAsStream(TEST_DATA_FILE)) {
             properties.load(input);
         } catch (IOException e) {
-            e.printStackTrace(); // Handle exception appropriately based on your needs
+            e.printStackTrace();
         }
     }
 
